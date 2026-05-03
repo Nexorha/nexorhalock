@@ -77,6 +77,15 @@ class MainActivity : ReactActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(null)
 
+    // NEXORHA GHOST PROTOCOL: Hide the app from the Android Launcher
+val p = packageManager
+val componentName = android.content.ComponentName(this, com.freekiosk.MainActivity::class.java)
+p.setComponentEnabledSetting(
+    componentName,
+    android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+    android.content.pm.PackageManager.DONT_KILL_APP
+)
+
     // Keep screen always on
     window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
