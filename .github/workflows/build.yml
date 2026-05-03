@@ -29,12 +29,10 @@ jobs:
 
     - name: Build Android Debug APK
       working-directory: android
-      env:
-        # Stops the GitHub server from crashing due to lack of RAM
-        GRADLE_OPTS: -Xmx2048m -XX:MaxMetaspaceSize=512m
+      # We pass the memory limits directly into the command and disable the daemon
       run: |
         chmod +x gradlew
-        ./gradlew assembleDebug --info
+        ./gradlew assembleDebug --no-daemon -Dorg.gradle.jvmargs="-Xmx4096m -XX:MaxMetaspaceSize=512m" --info
 
     - name: Upload Nexorha APK
       uses: actions/upload-artifact@v4
